@@ -1,26 +1,3 @@
-# Spring Boot and React starter app
-
-> Starter webapp using Spring Boot on the backend and React on the frontend, with 
-Maven and Webpack as build tools, hot reloading on both sides and without xml configuration.
-
-## Quickstart
-To run the app you just need to:
-
-    git clone https://github.com/dlizarra/spring-boot-react-webpack-starter.git ./starter
-    cd starter
-    mvn spring-boot:run
-
-To check everything is running you can:
-
-    # Visit the homepage
-    http://localhost:8080
-    
-    # Go to the sample REST endpoint
-    http://localhost:8080/api/users
-    
-    # Login to the H2 console (JDBC URL: 'jdbc:h2:mem:embedded', user = 'h2')
-    http://localhost:8080/h2-console
-
 ## Start developing
 The Java code is available at `src/main/java` as usual, and the frontend files are in 
 `src/main/frontend`.
@@ -30,9 +7,6 @@ Run `StarterMain` class from your IDE.
 
 ### Running the frontend
 Go to `src/main/frontend` and run `npm start`. (Run `npm install` before that if it's the first time)
-
-Now we should work with `localhost:9090` (this is where we'll see our live changes reflected)
- instead of `localhost:8080`.
 
 ### Hot reloading
 In the **backend** we make use of Spring DevTools to enable hot reloading, 
@@ -58,33 +32,33 @@ another one for testing. We use Spring Profiles in combination with Boot feature
 loading properties files by naming convention (application-*\<profile name\>*.properties).
 
 You can find the profile constants in 
-[StarterProfiles](src/main/java/com/dlizarra/starter/StarterProfiles.java) 
+[StarterProfiles](src/main/java/com/kl/starter/StarterProfiles.java) 
 and the properties files in `src/main/resources`.
 
 ### Database
 The database connections are configured in 
-[DatabaseConfig](src/main/java/com/dlizarra/starter/DatabaseConfig.java)
+[DatabaseConfig](src/main/java/com/kl/starter/DatabaseConfig.java)
 where we can find a working H2 embedded database connection for the default profile, and the staging and production configurations examples for working with an external database.
 
 ### Repository layer
 The project includes three base data repositories:
 
-- [ReadOnlyRepository](src/main/java/com/dlizarra/starter/support/jpa/ReadOnlyRepository.java): We can use this base repository when we want to make sure the application doesn't insert or update that type of entity, as it just exposes a set of methods to read entities.
-- [CustomCrudRepository](src/main/java/com/dlizarra/starter/support/jpa/CustomCrudRepository.java): It's the same as the `CrudRepository` that Spring Data provides, but the `findOne`method in the custom version returns a Java 8 `Optional<T>` object instead of `<T>`. It's just a small difference but it avoids having to override the `findOne` method in every repository to make it return an `Optional` object. This repository is intended to be used when we don't need paging or sorting capabilities for that entity.
-- [CustomJpaRepository](src/main/java/com/dlizarra/starter/support/jpa/CustomJpaRepository.java): Again, it's there to provide the same funcionality as the Spring `JpaRepository` but returning `Optional<T>`. We can extend this base repository if we want CRUD operations plus paging and sorting capabilities.
+- [ReadOnlyRepository](src/main/java/com/kl/starter/support/jpa/ReadOnlyRepository.java): We can use this base repository when we want to make sure the application doesn't insert or update that type of entity, as it just exposes a set of methods to read entities.
+- [CustomCrudRepository](src/main/java/com/kl/starter/support/jpa/CustomCrudRepository.java): It's the same as the `CrudRepository` that Spring Data provides, but the `findOne`method in the custom version returns a Java 8 `Optional<T>` object instead of `<T>`. It's just a small difference but it avoids having to override the `findOne` method in every repository to make it return an `Optional` object. This repository is intended to be used when we don't need paging or sorting capabilities for that entity.
+- [CustomJpaRepository](src/main/java/com/kl/starter/support/jpa/CustomJpaRepository.java): Again, it's there to provide the same funcionality as the Spring `JpaRepository` but returning `Optional<T>`. We can extend this base repository if we want CRUD operations plus paging and sorting capabilities.
 
 ### Security
 All the boilerplate for the initial Spring Security configuration is already created. These are they key classes:
 
-- [User](src/main/java/com/dlizarra/starter/user/User.java), [Role](src/main/java/com/dlizarra/starter/role/Role.java) and  [RoleName](src/main/java/com/dlizarra/starter/role/RoleName.java) which are populated by [data.sql](src/main/resources/data.sql) file for the default profile only.
-- [CustomUserDetails](src/main/java/com/dlizarra/starter/support/security/CustomUserDetails.java)
-- [CustomUserDetailsService](src/main/java/com/dlizarra/starter/support/security/CustomUserDetailsService.java)
-- [SecurityConfig](src/main/java/com/dlizarra/starter/SecurityConfig.java) with just very basic security rules.
+- [User](src/main/java/com/kl/starter/user/User.java), [Role](src/main/java/com/kl/starter/role/Role.java) and  [RoleName](src/main/java/com/kl/starter/role/RoleName.java) which are populated by [data.sql](src/main/resources/data.sql) file for the default profile only.
+- [CustomUserDetails](src/main/java/com/kl/starter/support/security/CustomUserDetails.java)
+- [CustomUserDetailsService](src/main/java/com/kl/starter/support/security/CustomUserDetailsService.java)
+- [SecurityConfig](src/main/java/com/kl/starter/SecurityConfig.java) with just very basic security rules.
 
 ### DTO-Entity mapping
-The project includes Orika and it already has a class, [OrikaBeanMapper](src/main/java/com/dlizarra/starter/support/orika/OrikaBeanMapper.java), ready to be injected anywhere and be used to do any mapping. It will also scan the project on startup searching for custom mappers and components.
+The project includes Orika and it already has a class, [OrikaBeanMapper](src/main/java/com/kl/starter/support/orika/OrikaBeanMapper.java), ready to be injected anywhere and be used to do any mapping. It will also scan the project on startup searching for custom mappers and components.
 
-You can see how to use it in [UserServiceImpl](src/main/java/com/dlizarra/starter/user/UserServiceImpl.java) or in this sample [project](https://github.com/dlizarra/orika-spring-integration).
+You can see how to use it in [UserServiceImpl](src/main/java/com/kl/starter/user/UserServiceImpl.java) or in this sample [project](https://github.com/dlizarra/orika-spring-integration).
 
 This, along with Lombok annotations for auto-generating getters, setters, toString methods and such, allows us to have much cleaner Entities and DTOs classes.
 
