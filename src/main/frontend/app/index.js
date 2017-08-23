@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../style/style.css'
 
-ReactDOM.render(
-	<h1 className="testblue">App working</h1>,
-	document.querySelector('.container'));
+// import "popper.js";
+// import "jquery";
+import 'bootstrap/dist/css/bootstrap.css'
+// import "bootstrap";
+
+import "../style/agency.scss";
+
+// ReactDOM.render(
+	{/*<h1 className="testblue">App fuerfheuifer</h1>,*/}
+	// document.querySelector('.container'));

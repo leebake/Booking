@@ -1,11 +1,14 @@
 const path = require('path');
 const merge = require('webpack-merge');
+const webpack = require('webpack');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
     source: path.join(__dirname, 'app'),
     output: path.join(__dirname, '../../../target/classes/static')
 };
+
+console.log(PATHS.output);
 
 const common = {
     entry: [
@@ -23,11 +26,31 @@ const common = {
         }, {
             test: /\.css$/,
             loader: 'style!css'
+        }, {
+            test: /\.scss$/,
+            loader: 'style!css!resolve-url-loader!sass'
+        }, {
+            test: /\.jpg|png$/,
+            loader: "file?name=[path][name].[ext]"
+        },{
+            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+            loader: "url-loader?limit=10000&mimetype=application/font-woff"
         }]
     },
     resolve: {
         extensions: ['', '.js', '.jsx']
-    }
+    },
+    plugins: [
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery',
+            'window.jQuery': 'jquery',
+            Popper: ['popper.js', 'default'],
+            // In case you imported plugins individually, you must also require them here:
+            // Util: "exports-loader?Util!bootstrap/js/dist/util",
+            // Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
+        })
+    ]
 };
 
 if (TARGET === 'start' || !TARGET) {
