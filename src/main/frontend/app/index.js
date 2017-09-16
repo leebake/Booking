@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// import "popper.js";
-// import "jquery";
-import 'bootstrap/dist/css/bootstrap.css'
-// import "bootstrap";
+import "tether";
+import "jquery";
+import "popper.js";
+// import 'bootstrap/dist/css/bootstrap.css'
+import "bootstrap";
+
+import agency from "startbootstrap-agency/js/agency";
 
 import "../style/agency.scss";
 

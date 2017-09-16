@@ -25,7 +25,7 @@ const common = {
             loader: 'babel'
         }, {
             test: /\.css$/,
-            loader: 'style!css'
+            loader: 'style!css|postcss-loader'
         }, {
             test: /\.scss$/,
             loader: 'style!css!resolve-url-loader!sass'
@@ -45,7 +45,8 @@ const common = {
             jQuery: 'jquery',
             $: 'jquery',
             'window.jQuery': 'jquery',
-            Popper: ['popper.js', 'default'],
+            "Tether": 'tether',
+            Popper: ['popper.js', 'default']
             // In case you imported plugins individually, you must also require them here:
             // Util: "exports-loader?Util!bootstrap/js/dist/util",
             // Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
