@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import "tether";
-import "jquery";
-import "popper.js";
-// import 'bootstrap/dist/css/bootstrap.css'
 import "bootstrap";
 
-import agency from "startbootstrap-agency/js/agency";
+import Nav from "./containers/Nav";
+import "../style/app.scss";
 
-import "../style/agency.scss";
+ReactDOM.render(
+<Nav/>,
+document.querySelector('#nav'));
 
-// ReactDOM.render(
-	{/*<h1 className="testblue">App fuerfheuifer</h1>,*/}
-	// document.querySelector('.container'));
+import agency from "./template/js/agency";

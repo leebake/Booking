@@ -22,34 +22,30 @@ const common = {
     module: {
         loaders: [{
             exclude: /node_modules/,
-            loader: 'babel'
+            loader: 'babel-loader'
         }, {
             test: /\.css$/,
-            loader: 'style!css|postcss-loader'
+            loader: 'style-loader!css-loader'
         }, {
             test: /\.scss$/,
-            loader: 'style!css!resolve-url-loader!sass'
+            loader: 'style-loader!css-loader!resolve-url-loader!sass-loader'
         }, {
             test: /\.jpg|png$/,
-            loader: "file?name=[path][name].[ext]"
+            loader: "file-loader?name=[path][name].[ext]"
         },{
             test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
             loader: "url-loader?limit=10000&mimetype=application/font-woff"
         }]
     },
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     plugins: [
         new webpack.ProvidePlugin({
             jQuery: 'jquery',
             $: 'jquery',
             'window.jQuery': 'jquery',
-            "Tether": 'tether',
             Popper: ['popper.js', 'default']
-            // In case you imported plugins individually, you must also require them here:
-            // Util: "exports-loader?Util!bootstrap/js/dist/util",
-            // Dropdown: "exports-loader?Dropdown!bootstrap/js/dist/dropdown",
         })
     ]
 };
