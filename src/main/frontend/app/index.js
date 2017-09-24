@@ -1,10 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import {createStore} from "redux";
+import { Provider } from 'react-redux'
 
 import App from "./App";
+import reducers from "./reducers";
+import "./template/js/agency";
+
+let store = createStore(reducers);
 
 ReactDOM.render(
-<App/>,
-document.querySelector('#nav'));
+    <Provider store={store}>
+        <App/>
+    </Provider>,
+    document.querySelector('#app'));
 
-import "./template/js/agency";
