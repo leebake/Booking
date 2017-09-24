@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import "bootstrap";
-
-import Nav from "./containers/Nav";
-import "../style/app.scss";
+import App from "./App";
 
 ReactDOM.render(
-<Nav/>,
+<App/>,
 document.querySelector('#nav'));
 
-import agency from "./template/js/agency";
+import "./template/js/agency";

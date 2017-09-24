@@ -4,7 +4,8 @@ const webpack = require('webpack');
 
 const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
-    source: path.join(__dirname, 'app'),
+    app: path.join(__dirname, 'app/index.js'),
+    libs: path.join(__dirname, 'app/libs.js'),
     output: path.join(__dirname, '../../../target/classes/static')
 };
 
@@ -12,7 +13,8 @@ console.log(PATHS.output);
 
 const common = {
     entry: [
-        PATHS.source
+        PATHS.libs,
+        PATHS.app
     ],
     output: {
         path: PATHS.output,
@@ -21,8 +23,12 @@ const common = {
     },
     module: {
         loaders: [{
+            test: /.jsx?$/,
+            loader: 'babel-loader',
             exclude: /node_modules/,
-            loader: 'babel-loader'
+            query: {
+                presets: ['es2015', 'react']
+            }
         }, {
             test: /\.css$/,
             loader: 'style-loader!css-loader'
@@ -32,8 +38,11 @@ const common = {
         }, {
             test: /\.jpg|png$/,
             loader: "file-loader?name=[path][name].[ext]"
-        },{
-            test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        }, {
+            test: /.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?/,
+            loader: "file-loader"
+        }, {
+            test: /\.(woff|woff2)(\?.*$|$)/,
             loader: "url-loader?limit=10000&mimetype=application/font-woff"
         }]
     },
