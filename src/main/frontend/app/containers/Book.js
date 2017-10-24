@@ -1,25 +1,26 @@
 import React from "react";
-import { connect } from 'react-redux'
+import {connect} from "react-redux";
 
 import BookButton from "../components/BookButton";
 import {BookActions} from "./../actions";
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = ({BookReducer}) => {
     return {
-        onClick: () => {
-            dispatch(new BookActions().book())
-        },
-        text: "Zarezerwuj"
+        text: BookReducer.bookButtonText
     }
 };
 
-// class Book extends React.Component {
-//
-//     render() {
-//         return (<BookButton/>)
-//     }
-// }
+class Book extends React.Component {
 
-export default connect(null, mapDispatchToProps)(BookButton);
+    onButtonClick = () => {
+        this.props.dispatch(new BookActions().book())
+    };
+
+    render() {
+        return (<BookButton onClick={this.onButtonClick} text={this.props.text}/>)
+    }
+}
+
+export default connect(mapStateToProps, null)(Book);
 
 

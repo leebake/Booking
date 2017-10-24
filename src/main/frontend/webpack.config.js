@@ -9,7 +9,10 @@ const PATHS = {
     output: path.join(__dirname, '../../../target/classes/static')
 };
 
-console.log(PATHS.output);
+const reactToolboxVariables = {
+    'z-index-higher': "1060"
+};
+
 
 const common = {
     entry: [
@@ -27,23 +30,67 @@ const common = {
             loader: 'babel-loader',
             exclude: /node_modules/,
             query: {
-                presets: ['es2015', 'react']
+                presets: ['es2015', 'react', 'stage-2']
             }
         }, {
             test: /\.css$/,
-            loader: 'style-loader!css-loader'
+            use: [
+                {loader: 'style-loader'},
+                {
+                    loader: 'css-loader',
+                    options: {
+                        modules: true,
+                        sourceMap: true,
+                        importLoaders: 1,
+                        localIdentName: '[name]__[local]___[hash:base64:8]'
+                    }
+                },
+                {
+                    loader: 'postcss-loader',
+                    options: {
+                        sourceMap: true,
+                        sourceComments: true,
+                        /* eslint-disable global-require */
+                        plugins: [
+                            require('postcss-cssnext')({
+                                features: {
+                                    customProperties: {
+                                        variables: reactToolboxVariables,
+                                    },
+                                },
+                            }),
+                        ],
+
+                        /* eslint-enable */
+                    }
+                }
+            ]
         }, {
             test: /\.scss$/,
-            loader: 'style-loader!css-loader!resolve-url-loader!sass-loader'
+            use: [{
+                loader: "style-loader"
+            }, {
+                loader: "css-loader",
+                options: {
+                    sourceMap: true
+                }
+            }, {
+                loader: "resolve-url-loader"
+            }, {
+                loader: "sass-loader",
+                options: {
+                    sourceMap: true
+                }
+            }]
         }, {
             test: /\.jpg|png$/,
             loader: "file-loader?name=[path][name].[ext]"
         }, {
             test: /.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?/,
-            loader: "file-loader"
+            loader: "file-loader?sourceMap"
         }, {
             test: /\.(woff|woff2)(\?.*$|$)/,
-            loader: "url-loader?limit=10000&mimetype=application/font-woff"
+            loader: "url-loader?limit=10000&mimetype=application/font-woff&sourceMap"
         }]
     },
     resolve: {

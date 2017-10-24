@@ -1,17 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
-import { Provider } from 'react-redux'
+import {Provider} from "react-redux";
+import {applyMiddleware, createStore} from "redux";
+import logger from "redux-logger";
 
 import App from "./App";
 import reducers from "./reducers";
 import "./template/js/agency";
 
-let store = createStore(reducers);
+let store = createStore(reducers, applyMiddleware(logger));
 
-ReactDOM.render(
+const Root = () => (
     <Provider store={store}>
         <App/>
-    </Provider>,
-    document.querySelector('#app'));
+    </Provider>
+);
+
+ReactDOM.render(
+    <Root/>,
+    document.querySelector('#app')
+);
 

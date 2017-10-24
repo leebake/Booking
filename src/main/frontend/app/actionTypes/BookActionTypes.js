@@ -1,5 +1,7 @@
 const START_BOOK = 'START_BOOK';
+const CLOSE_BOOK_MODAL = 'CLOSE_BOOK_MODAL';
 
 export default {
-    START_BOOK
+    START_BOOK,
+    CLOSE_BOOK_MODAL
 }

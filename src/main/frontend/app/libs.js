@@ -1,3 +1,5 @@
+import 'typeface-roboto'
+import 'material-design-icons'
 import "bootstrap";
 import "jquery.easing";
 

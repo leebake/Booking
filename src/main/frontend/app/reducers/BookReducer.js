@@ -1,7 +1,8 @@
 import { BOOK } from '../actionTypes';
 
 const initialState = {
-    bookModalWindowIsVisible: false
+    bookModalWindowIsVisible: false,
+    bookButtonText: "Zarezerwuj"
 };
 export default (state = initialState, action) => {
 
@@ -9,6 +10,10 @@ export default (state = initialState, action) => {
         case BOOK.START_BOOK:
             return Object.assign({}, state, {
                 bookModalWindowIsVisible: true
+            });
+        case BOOK.CLOSE_BOOK_MODAL:
+            return Object.assign({}, state, {
+                bookModalWindowIsVisible: false
             });
         default:
             return state;
